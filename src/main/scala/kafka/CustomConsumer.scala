@@ -16,9 +16,11 @@ class CustomConsumer {
 
   //set the required properties for consumer
   properties.put("bootstrap.servers", config.getString("BOOTSTRAP_SERVER"))
-  properties.put("group.id", "simple-kafka")
-  properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
-  properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer")
+  properties.put("group.id", config.getString("GROUP_ID"))
+  properties.put("auto.offset.reset", "earliest")
+  properties.put("enable.auto.commit", "false")
+  properties.put("key.deserializer", config.getString("DESERIALIZER"))
+  properties.put("value.deserializer", config.getString("DESERIALIZER"))
 
   val consumer = new KafkaConsumer[String, String](properties)
 
